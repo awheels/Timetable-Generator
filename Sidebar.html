@@ -1,0 +1,62 @@
+<?!= HtmlService.createHtmlOutputFromFile('Styles').getContent() ?>
+
+<section>
+  <h1>Setup your Timetable</h1>
+</section>
+
+<form id="myForm">
+  <div class="block form-group">
+    <label for="select">Select the # of days in cycle:</label>
+    <select id="select_cycles" name="cycle">
+      <option selected>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+    </select>
+  </div>
+
+  <div class="block form-group">
+    <label for="select">Select the number of periods per day:</label>
+    <select id="select_periods" name="periods">
+      <option selected>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+      <option>7</option>
+      <option>8</option>
+    </select>
+  </div> 
+
+  <div class="block form-group">
+    <label>Select date:</label>
+    <input type="text" name="date" id="datepicker" />
+  </div>
+    
+</form> 
+
+
+<button class="create" onclick="submitData()">Create</button>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    jQuery("#datepicker").datepicker();
+  });
+</script>
+
+<script>
+  window.submitData = function() {
+    var cycles = document.getElementById('select_cycles').value;
+    var periods = document.getElementById('select_periods').value;
+    var selectedDate = document.getElementById('datepicker').value;
+
+    google.script.run.createTemplate(cycles, periods, selectedDate);
+  };
+</script>
+
+<?!= HtmlService.createHtmlOutputFromFile('Javascript').getContent() ?>
